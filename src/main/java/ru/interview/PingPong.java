@@ -1,4 +1,4 @@
-package ru.rustore;
+package ru.interview;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

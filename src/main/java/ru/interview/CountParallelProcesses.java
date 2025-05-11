@@ -1,4 +1,4 @@
-package ru.rustore;
+package ru.interview;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

@@ -1,4 +1,4 @@
-package ru.rustore;
+package ru.interview;
 
 public class Spiral {
     /*
