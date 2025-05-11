@@ -1,6 +1,6 @@
 package ru.rustore;
 
-public class Algo {
+public class CountParallelProcesses {
    /*
 there are logs from a service, and for each request we have a record like:
 getData <unix start time> <unix end time>

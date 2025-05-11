@@ -9,20 +9,18 @@ public class PingPong {
      *   The thread "ping" will play first. The game is finished after N iterations.
      */
     public static void main(String[] args) throws InterruptedException {
-        final int N = 6;
+        final int N = 3;
         final int maxIter = N * 2;
-        final AtomicInteger iterations = new AtomicInteger(1);
+        final AtomicInteger iterations = new AtomicInteger(maxIter);
         final Object lock = new Object();
-        final Player player1 = new Player("ping", true, iterations, 100, maxIter, lock);
-        final Player player2 = new Player("pong", false, iterations, 100, maxIter, lock);
+        final Player player1 = new Player("ping", false, iterations, lock);
+        final Player player2 = new Player("pong", true, iterations, lock);
 
         player1.start();
         player2.start();
 
         player1.join();
         player2.join();
-
-//        player1.interrupt();
 
         System.out.println("Done");
 
@@ -31,57 +29,43 @@ public class PingPong {
     private static class Player extends Thread {
         private final String message;
         private final boolean odd;
-        private final AtomicInteger iteration;
-        private final long delay;
-        private final int maxIteration;
+        private final AtomicInteger iterations;
         private final Object monitor;
 
         private Player(String message,
                        boolean odd,
-                       AtomicInteger iteration,
-                       long delay,
-                       int maxIteration,
+                       AtomicInteger iterations,
                        Object monitor) {
             this.message = message;
             this.odd = odd;
-            this.iteration = iteration;
-            this.delay = delay;
-            this.maxIteration = maxIteration;
+            this.iterations = iterations;
             this.monitor = monitor;
         }
 
         @Override
         public void run() {
-            while (!isInterrupted() && iteration.get() <= maxIteration) {
+            while (!isInterrupted() && iterations.get() > 0) {
                 synchronized (monitor) {
-                    final int i = iteration.get();
+                    final int i = iterations.get();
                     if (odd == isOdd(i)) {
                         System.out.println(message);
-    //                    sleep_(delay);
-                        iteration.incrementAndGet();
+                        iterations.decrementAndGet();
+
                         monitor.notify();
                     } else {
-                        wait_();
+                        await();
                     }
                 }
             }
         }
 
         private boolean isOdd(int value) {
-            return value % 2 != 0;
+            return (value & 1) == 1;
         }
 
-        private void wait_() {
+        private void await() {
             try {
                 monitor.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        private void sleep_(long delay) {
-            try {
-                sleep(delay);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

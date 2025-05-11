@@ -1,6 +1,6 @@
 package ru.rustore;
 
-class Spiral {
+public class Spiral {
     /*
      * Fill the array with numbers from 1 to N like below:
      * N = 6
@@ -20,32 +20,24 @@ class Spiral {
      * 1 4
      * 2 3
      */
-    /*
-    0,0 | 0,1 | 0,2 | 1,2 | 2,2 | 2,1 | 2,0 | 1,0 | 1,1
-     */
     public static void main(String[] args) {
-        final int N = 4;
+        final int N = 6;
         int [][] field = new int[N][N];
         // code
-        Direction direction = Direction.DOWN;
+        Direction direction = Direction.start();
         int i = 0;
         int j = 0;
         int count = 1;
-        field[0][0] = count++;
+        field[i][j] = count++;
         while (count <= N * N) {
             final Point nextPoint = direction.nextPoint(i, j);
-            if (nextPoint.i() >= N || nextPoint.j() >= N || nextPoint.i() < 0 || nextPoint.j() < 0) {
+            if (nextPoint.isOutOfBounds(N) || field[nextPoint.i()][nextPoint.j()] != 0) {
                 direction = direction.nextDirection();
-                continue;
+            } else {
+                i = nextPoint.i();
+                j = nextPoint.j();
+                field[i][j] = count++;
             }
-            if (field[nextPoint.i()][nextPoint.j()] != 0) {
-                direction = direction.nextDirection();
-                continue;
-            }
-
-            i = nextPoint.i();
-            j = nextPoint.j();
-            field[i][j] = count++;
         }
 
         print(field);
@@ -64,6 +56,8 @@ class Spiral {
     private enum Direction {
         DOWN, RIGHT, UP, LEFT;
 
+        private static final Direction[] values = values();
+
         public Point nextPoint(int i, int j) {
             return switch (this) {
                 case DOWN -> new Point(i + 1, j);
@@ -74,21 +68,22 @@ class Spiral {
         }
 
         public Direction nextDirection() {
-            final Direction[] values = values();
-            for (int i = 0; i < values.length; i++) {
-                if (this == values[i]) {
-                    if (i == values.length - 1) {
-                        return values[0];
-                    }
-
-                    return values[i + 1];
-                }
+            final int ordinal = ordinal();
+            if (ordinal == values.length - 1) {
+                return values[0];
             }
 
-            throw new IllegalStateException();
+            return values[ordinal + 1];
+        }
+
+        public static Direction start() {
+            return DOWN;
         }
     }
 
     private record Point(int i, int j) {
+        public boolean isOutOfBounds(int limit) {
+            return i >= limit || j >= limit || i < 0 || j < 0;
+        }
     }
 }
