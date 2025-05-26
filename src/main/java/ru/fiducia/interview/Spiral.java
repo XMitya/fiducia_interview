@@ -1,4 +1,4 @@
-package ru.interview;
+package ru.fiducia.interview;
 
 public class Spiral {
     /*

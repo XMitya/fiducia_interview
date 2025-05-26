@@ -1,11 +1,11 @@
-package ru.interview;
+package ru.fiducia.interview;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-import static ru.interview.LargeFileRowsSort.Cursor.CURSOR_COMPARATOR;
+import static ru.fiducia.interview.LargeFileRowsSort.Cursor.CURSOR_COMPARATOR;
 
 /**
  * Dumb implementation of sorting rows in a large file. May be more effective if

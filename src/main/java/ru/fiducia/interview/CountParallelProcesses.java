@@ -1,4 +1,4 @@
-package ru.interview;
+package ru.fiducia.interview;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

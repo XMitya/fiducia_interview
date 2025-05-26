@@ -1,4 +1,4 @@
-package ru.interview;
+package ru.fiducia.interview;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
