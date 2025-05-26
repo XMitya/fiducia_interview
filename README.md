@@ -17,8 +17,8 @@ How to sort large file with limited memory. It's just a question, but here is a 
 ### JVM memory types
 What kinds of memory in JVM do you know?
 
-Good video that explains most things about JVM memory. 
-![watch](https://www.youtube.com/watch?v=kKigibHrV5I)
+Good video that explains most things about JVM memory.
+https://www.youtube.com/watch?v=kKigibHrV5I
 
 ### Sys design section
 You have a system that collects data from many sources. Besides all information, you have 3 important columns: id, timestamp, cost.  
