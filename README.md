@@ -1,7 +1,7 @@
 # Fiducia.eco interview on java dev position
 
 ## Tech screening
-General questions, like what is JIT, JCE. How JVM works, etc. 
+General questions, like what is JIT, JCE. How JVM works, etc.  
 What kind of encryption do you know? Means symmetric and asymmetric.
 
 ## Tech interview
