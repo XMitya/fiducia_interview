@@ -14,6 +14,9 @@ General questions, like what is JIT, JCE. How JVM works, etc.
 How to sort large file with limited memory. It's just a question, but here is a simple implementation
 [LargeFileRowsSort.java](src/main/java/ru/fiducia/interview/LargeFileRowsSort.java)
 
+### Count parallel processes
+[CountParallelProcesses.java](src/main/java/ru/fiducia/interview/CountParallelProcesses.java)
+
 ### JVM memory types
 What kinds of memory in JVM do you know?
 
